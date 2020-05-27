@@ -28,4 +28,9 @@ public class AppTest
 	public void shouldReturnSumOfAllOnMultipleCommaSeparatedNumbers() {
 		assertEquals(23, App.add("12,8,3"));
 	}
+	
+	@Test
+	public void shouldReturnSumOnNewLineAndCommaSeparatedNumbers() {
+		assertEquals(23, App.add("12\n8,3"));
+	}
  }
