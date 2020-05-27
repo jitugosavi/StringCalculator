@@ -13,4 +13,9 @@ public class AppTest
 	public void shouldReturnZeroOnEmptyInput() {
 		assertEquals(0, App.add(""));
 	}
+	
+	@Test
+	public void shouldReturnSameNumberOnOneNumberInString() {
+		assertEquals(5, App.add("5"));
+	}
 }

@@ -5,8 +5,8 @@ public class App
     public static int add(String number) {
     	if (number == null || number.length() <= 0) {
     		return 0;
+    	} else {
+    		return Integer.parseInt(number);
     	}
-    	
-    	return -1;
     }
 }
