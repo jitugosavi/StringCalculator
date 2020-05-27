@@ -33,4 +33,9 @@ public class AppTest
 	public void shouldReturnSumOnNewLineAndCommaSeparatedNumbers() {
 		assertEquals(23, App.add("12\n8,3"));
 	}
+	
+	@Test
+	public void shouldReturnSumOnCustomDelimeter() {
+		assertEquals(23, App.add("//;\n12;8;3"));
+	}
  }
