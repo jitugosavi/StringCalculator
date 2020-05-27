@@ -18,4 +18,9 @@ public class AppTest
 	public void shouldReturnSameNumberOnOneNumberInString() {
 		assertEquals(5, App.add("5"));
 	}
+	
+	@Test
+	public void shouldReturnSumOnCommaSeparatedTwoNumbers() {
+		assertEquals(12, App.add("7,5"));
+	}
 }
