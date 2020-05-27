@@ -23,4 +23,9 @@ public class AppTest
 	public void shouldReturnSumOnCommaSeparatedTwoNumbers() {
 		assertEquals(12, App.add("7,5"));
 	}
-}
+	
+	@Test
+	public void shouldReturnSumOfAllOnMultipleCommaSeparatedNumbers() {
+		assertEquals(23, App.add("12,8,3"));
+	}
+ }

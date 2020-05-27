@@ -7,7 +7,13 @@ public class App
     		return 0;
     	} else if (number.contains(",")) {
     		String[] numbers = number.split(",");
-    		return Integer.parseInt(numbers[0]) + Integer.parseInt(numbers[1]); 
+    		int sum = 0;
+    		
+    		for (int i = 0; i < numbers.length; i++) {
+    			sum += Integer.parseInt(numbers[i]);
+    		}
+    		
+    		return sum; 
     	}
     	else {
     		return Integer.parseInt(number);
