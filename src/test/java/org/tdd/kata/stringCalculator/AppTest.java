@@ -79,4 +79,9 @@ public class AppTest
 	public void shouldIgnoreNumberGreaterThanOneThousand() {
 		assertEquals(23, App.add("12,1004,11"));
 	}
+	
+	@Test
+	public void shouldAllowDelimeterWithLengthMoreThanOne() {
+		assertEquals(23, App.add("//***\n12***8***3"));
+	}
  }

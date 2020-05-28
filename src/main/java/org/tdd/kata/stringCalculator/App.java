@@ -68,6 +68,10 @@ public class App
     	List<Integer> numbers = new ArrayList<Integer>();
     	
     	for (int i = 0; i < numbersString.length; i++) {
+    		if (numbersString[i].isEmpty()) {
+    			continue;
+    		}
+  
     		int number = Integer.parseInt(numbersString[i]);
     		
     		if (number > THRESHOLD) {
@@ -85,7 +89,7 @@ public class App
     }
     
     private static String[] splitCustomDelimeter(String text) {
-    	Matcher matcher = Pattern.compile("//(.)\n(.*)", Pattern.MULTILINE).matcher(text);
+    	Matcher matcher = Pattern.compile("//(.*)\n(.*)", Pattern.MULTILINE).matcher(text);
 		matcher.matches();
 		String delimeter = matcher.group(1); 
 		String numbers = matcher.group(2);
