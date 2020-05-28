@@ -84,4 +84,14 @@ public class AppTest
 	public void shouldAllowDelimeterWithLengthMoreThanOne() {
 		assertEquals(23, App.add("//***\n12***8***3"));
 	}
+	
+	@Test
+	public void shouldAllowMultipleDelimeters() {
+		assertEquals(6, App.add("//[*][%]\n1*2%3"));
+	}
+	
+	@Test 
+	public void shouldAllowMultipleDeliemetersWithLengthMoreThanOne() {
+		assertEquals(6, App.add("//[***][%%%]\n1***2%%%3"));
+	}
  }
