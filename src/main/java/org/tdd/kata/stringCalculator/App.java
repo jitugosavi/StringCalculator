@@ -6,41 +6,50 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class App 
+public class App
 {
-    public static int add(String text) {
-    	if (text == null || text.length() <= 0) {
-    		return 0;
-    	} else {
-    		String regex = ",|\n";
-    		String[] numbersString = null;
+	private static int THRESHOLD = 1000;
+	private static String REGEX = ",|\n";
 
-    		if (useCustomDelimeterPattern(text)) {
-    			numbersString = splitCustomDelimeter(text);
-    		} else {
-    			numbersString = splitUsingDelimeter(text, regex);
-    		}
-    		
-    		int sum = 0;
-    		
-			List<Integer> numbers = getValidNumbers(numbersString);
-			List<Integer> negatives = getNegativeNumbers(numbers);
-			
-			if (negatives.size() > 0) {
-				throw new RuntimeException("Negatives not allowed : " + 
-						negatives.stream()
-					    .map(String::valueOf).collect(Collectors.joining(",")));
-			}
-    		
-    		for (int i = 0; i < numbers.size(); i++) {
-    			sum += numbers.get(i);
-    		}
-    		
-    		return sum; 
-    	}
+    public static int add(String text) {
+		List<Integer> numbers = getValidNumbers(text);
+		ensureAllPositives(numbers);
+		return getSum(numbers);
     }
     
-    private static List<Integer> getNegativeNumbers(List<Integer> numbers) {
+    private static int getSum(List<Integer> numbers) {
+    	int sum = 0;
+    
+    	for (int i = 0; i < numbers.size(); i++) {
+			sum += numbers.get(i);
+		}
+		
+		return sum; 
+		
+	}
+
+	private static void ensureAllPositives(List<Integer> numbers) {
+    	List<Integer> negatives = getNegativeNumbers(numbers);
+		
+		if (negatives.size() > 0) {
+			throw new RuntimeException("Negatives not allowed : " + 
+					negatives.stream()
+				    .map(String::valueOf).collect(Collectors.joining(",")));
+		}
+		
+	}
+
+	private static String[] tokenize(String text) {
+		if (text == null || text.isEmpty()) {
+			return new String[0];
+		} else if (useCustomDelimeterPattern(text)) {
+			return splitCustomDelimeter(text);
+		} else {
+			return splitUsingDelimeter(text, null);
+		}
+	}
+
+	private static List<Integer> getNegativeNumbers(List<Integer> numbers) {
 		List<Integer> negatives = new ArrayList<>();
 		
 		for (Integer number : numbers) {
@@ -53,12 +62,18 @@ public class App
   
 	}
 
-	private static List<Integer> getValidNumbers(String[] numbersString) {
-    	
+	private static List<Integer> getValidNumbers(String text) {
+		String[] numbersString = tokenize(text);
+
     	List<Integer> numbers = new ArrayList<Integer>();
     	
     	for (int i = 0; i < numbersString.length; i++) {
     		int number = Integer.parseInt(numbersString[i]);
+    		
+    		if (number > THRESHOLD) {
+    			continue;
+    		}
+    		
     		numbers.add(number);
     	}
     	
@@ -78,6 +93,10 @@ public class App
     }
     
     private static String[] splitUsingDelimeter(String text, String delimeter) {
+    	if (delimeter == null || delimeter.isEmpty()) {
+    		delimeter = REGEX;
+    	}
+    	
     	return text.split("[" + delimeter + "]");
     }
 }

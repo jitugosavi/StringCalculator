@@ -74,4 +74,9 @@ public class AppTest
 			assertEquals("Negatives not allowed : -1,-22", e.getMessage());
 		}
 	}
+	
+	@Test
+	public void shouldIgnoreNumberGreaterThanOneThousand() {
+		assertEquals(23, App.add("12,1004,11"));
+	}
  }
