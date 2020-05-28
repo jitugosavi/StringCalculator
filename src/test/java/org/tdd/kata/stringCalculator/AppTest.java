@@ -1,6 +1,7 @@
 package org.tdd.kata.stringCalculator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,5 +43,35 @@ public class AppTest
 	@Test
 	public void shouldReturnSumIfCustomDelimeterIsSpeacialChar() {
 		assertEquals(23, App.add("//.\n12.8.3"));
+	}
+	
+	@Test
+	public void shouldRaiseExceptionOnNegativeNumbers() {
+		try {
+			App.add("-1,2,3");
+			fail("Exeception expected");
+		} catch (Exception e) {
+			
+		}
+	}
+	
+	@Test
+	public void exceptionMessageShouldContainNegativeNumber() {
+		try {
+			App.add("-1,2,3");
+			fail("Exeception expected");
+		} catch (Exception e) {
+			assertEquals("Negatives not allowed : -1", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void exceptionMessageShouldContainMultipleNegativeNumbers() {
+		try {
+			App.add("-1,-22,3");
+			fail("Exeception expected");
+		} catch (Exception e) {
+			assertEquals("Negatives not allowed : -1,-22", e.getMessage());
+		}
 	}
  }
