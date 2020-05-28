@@ -38,4 +38,9 @@ public class AppTest
 	public void shouldReturnSumOnCustomDelimeter() {
 		assertEquals(23, App.add("//;\n12;8;3"));
 	}
+	
+	@Test
+	public void shouldReturnSumIfCustomDelimeterIsSpeacialChar() {
+		assertEquals(23, App.add("//.\n12.8.3"));
+	}
  }
